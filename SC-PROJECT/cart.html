@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - ShopVerse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f2f2f2;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #333;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .cart-info {
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .cart-info h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .cart-info p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #6c63ff;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity button {
+      padding: 5px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .checkout-btn {
+      display: block;
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #574fd8;
+    }
+
+    .address-section, .payment-section {
+      margin-top: 30px;
+    }
+
+    .address-section input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .payment-methods label {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .payment-methods input {
+      margin-right: 10px;
+    }
+
+    /* New styles for payment inputs */
+    .payment-options {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .payment-options input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .payment-request {
+      margin-top: 15px;
+    }
+
+    .confirmation-msg {
+      margin-top: 10px;
+      color: green;
+      font-weight: 600;
+    }
+
+    /* Success Animation */
+    .payment-success {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+      color: green;
+    }
+
+    .payment-success img {
+      width: 150px;
+      height: 150px;
+    }
+
+    .payment-success h3 {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    .redirect-msg {
+      font-size: 1rem;
+      color: #333;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h2>Your Shopping Cart 🛒</h2>
+
+    <!-- Cart Item Container -->
+    <div id="cartItemsContainer"></div>
+
+    <div class="address-section">
+      <h3>Delivery Address 📍</h3>
+      <input type="text" placeholder="Enter or change your address" />
+    </div>
+
+    <div class="payment-section">
+      <h3>Payment Options 💳</h3>
+      <div class="payment-methods">
+        <label><input type="radio" name="payment" value="gpay" id="gpay" onclick="showPaymentOptions()"> Google Pay (GPay)</label>
+        <label><input type="radio" name="payment" value="cod" id="cod" onclick="showPaymentOptions()"> Cash on Delivery</label>
+      </div>
+    </div>
+
+    <div class="payment-options" id="paymentOptions">
+      <div id="gpay-options" style="display: none;">
+        <h4>Enter your UPI ID</h4>
+        <input type="text" id="upi-id" placeholder="Enter your UPI ID (e.g., example@upi)" />
+      </div>
+
+      <div id="cod-options" style="display: none;">
+        <p class="confirmation-msg">You will be charged ₹15 extra for Cash on Delivery.</p>
+      </div>
+
+      <div class="payment-request">
+        <button class="checkout-btn" onclick="handlePayment()">Proceed to Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Success Animation -->
+  <div class="payment-success" id="paymentSuccess">
+    <img src="https://img.icons8.com/ios/452/checked.png" alt="Success" />
+    <h3>Payment Successful! 🎉</h3>
+    <p class="redirect-msg">Redirecting to Order Confirmation...</p>
+  </div>
+
+  <script>
+    // Get cart item from localStorage
+    let cartItems = [];
+
+    const storedItem = localStorage.getItem('cartItem');
+    if (storedItem) {
+      cartItems.push(JSON.parse(storedItem));
+    } else {
+      // If no item in cart, show empty message
+      document.getElementById('cartItemsContainer').innerHTML = '<p>Your cart is empty 😔</p>';
+    }
+
+
+  cartItems.forEach((item, index) => {
+    const cartItemHTML = `
+      <div class="cart-item">
+        <img src="${item.image}" alt="Product" />
+        <div class="cart-info">
+          <h4>${item.name}</h4>
+          <p>${item.description}</p>
+          <div class="quantity">
+            <button onclick="decreaseQty(${index})">-</button>
+            <span id="quantity-${index}">${item.quantity}</span>
+            <button onclick="increaseQty(${index})">+</button>
+          </div>
+        </div>
+        <p class="price">${item.price}</p>
+      </div>
+    `;
+    container.innerHTML += cartItemHTML;
+  });
+
+
+function increaseQty(index) {
+  cartItems[index].quantity++;
+  document.getElementById(`quantity-${index}`).innerText = cartItems[index].quantity;
+}
+
+function decreaseQty(index) {
+  if (cartItems[index].quantity > 1) {
+    cartItems[index].quantity--;
+    document.getElementById(`quantity-${index}`).innerText = cartItems[index].quantity;
+  }
+}
+
+renderCartItems();
+
+function showPaymentOptions() {
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+  const paymentOptions = document.getElementById("paymentOptions");
+
+  if (paymentMethod === "gpay") {
+    document.getElementById("gpay-options").style.display = "block";
+    document.getElementById("cod-options").style.display = "none";
+  } else if (paymentMethod === "cod") {
+    document.getElementById("gpay-options").style.display = "none";
+    document.getElementById("cod-options").style.display = "block";
+  }
+
+  paymentOptions.style.display = "block";
+}
+
+function handlePayment() {
+  const paymentMethod = document.querySelector('input[name="payment"]:checked');
+  const upiId = document.getElementById('upi-id').value;
+  const address = document.querySelector('.address-section input').value;
+
+  if (!address) {
+    alert("Please enter your address.");
+    return;
+  }
+
+  if (!paymentMethod) {
+    alert("Please select a payment method.");
+    return;
+  }
+
+  if (paymentMethod.value === "gpay") {
+    if (!upiId) {
+      alert("Please enter a valid UPI ID.");
+    } else {
+      completePayment();
+    }
+  } else if (paymentMethod.value === "cod") {
+    completePayment();
+  }
+}
+
+function completePayment() {
+  document.querySelector(".cart-container").style.display = "none";
+  document.getElementById("paymentSuccess").style.display = "block";
+
+  // Clear cart data after payment
+  sessionStorage.removeItem('cartItem');
+
+  // Redirect after 3 seconds
+  setTimeout(() => {
+    window.location.href = "confirm.html"; // Redirect to order confirmation page
+  }, 3000);
+}
+
+  </script>
+</body>
+</html>

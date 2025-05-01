@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopVerse - Home</title>
+  <link rel="stylesheet" href="./css/style-home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* ---------- BASIC STYLES ---------- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ---------- HEADER ---------- */
+    .top-nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 50px;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #6c63ff;
+    }
+    .search-bar input {
+      padding: 10px;
+      width: 550px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-icons img {
+      width: 40px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    /* ---------- NAVIGATION BAR ---------- */
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #fff;
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+    }
+    .nav-bar a {
+      margin: 5px 10px;
+      color: #555;
+    }
+    .nav-bar a:hover {
+      color: #6c63ff;
+    }
+
+    /* ---------- CAROUSEL ---------- */
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .carousel-slide {
+      display: flex;
+      width: 500%;
+      animation: slide 100s infinite;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0%); }
+    
+      100% { transform: translateX(-400%); }
+    }
+
+    /* ---------- CATEGORIES SCROLL ---------- */
+    .category-scroll-section {
+      padding: 40px;
+      background: #fff;
+    }
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+    .category-scroll-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .category-card {
+      flex: 0 0 auto;
+      background: #f8f8f8;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      min-width: 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .category-card img {
+      width: 140px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 16px;
+    }
+    .category-label {
+      background: #6c63ff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* ---------- PRODUCTS ---------- */
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+    .product-card {
+      width: 220px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .price {
+      font-weight: bold;
+      color: #2e8b57;
+      margin: 6px 0;
+    }
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .heart-icon {
+      font-size: 22px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .heart-icon:hover {
+      color: red;
+      transform: scale(1.2);
+    }
+    .rating {
+      font-size: 14px;
+      color: #f1c40f;
+    }
+    .buy-btn {
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .buy-btn:hover {
+      background: #e65c50;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Top Navigation -->
+<div class="top-nav">
+  <div class="logo">ShopVerse</div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for products...">
+  </div>
+  <div class="nav-icons">
+    <img src="profile.png" alt="Profile">
+    <img src="cart.png" alt="Cart">
+  </div>
+</div>
+
+<!-- Categories Navigation -->
+<div class="nav-bar">
+  <a href="#">ALL</a>
+  <a href="#">Grocery</a>
+  <a href="#">Stationery</a>
+  <a href="#">Makeup</a>
+  <a href="#">Phones</a>
+  <a href="#">Clothing</a>
+  <a href="#">Footwear</a>
+  <a href="#">Accessories</a>
+  <a href="#">Home & Living</a>
+  <a href="#">Electronics</a>
+  <a href="#">Toys</a>
+  <a href="#">Watches</a>
+  <a href="#">Pets Supplies</a>
+  <a href="#">Sports</a>
+  <a href="#">Fitness</a>
+  <a href="#">Books</a>
+  <a href="#">Food & Drinks</a>
+  <a href="#">Kids</a>
+</div>
+
+<!-- Carousel Section -->
+<div class="carousel-container">
+  <div class="carousel-slide">
+    <img src="banner_1[1].jpg" alt="Deal of the Day">
+    <img src="banner_2[1].jpg" alt="Summer Sale">
+    <img src="banner_3[1].jpg" alt="New Arrivals">
+    <img src="banner_4[1].jpg" alt="Electronics Deals">
+    <img src="banner_1[1].jpg" alt="Deal of the Day">
+    <img src="banner_2[1].jpg" alt="Summer Sale">
+    <img src="banner_3[1].jpg" alt="New Arrivals">
+    <img src="banner_4[1].jpg" alt="Electronics Deals">
+    <img src="banner_1[1].jpg" alt="Deal of the Day">
+    <img src="banner_2[1].jpg" alt="Summer Sale">
+    <img src="banner_3[1].jpg" alt="New Arrivals">
+    <img src="banner_4[1].jpg" alt="Electronics Deals">
+    <img src="banner_1[1].jpg" alt="Deal of the Day">
+    <img src="banner_2[1].jpg" alt="Summer Sale">
+    <img src="banner_3[1].jpg" alt="New Arrivals">
+    <img src="banner_4[1].jpg" alt="Electronics Deals">
+    <img src="banner_1[1].jpg" alt="Deal of the Day">
+    <img src="banner_2[1].jpg" alt="Summer Sale">
+    <img src="banner_3[1].jpg" alt="New Arrivals">
+    <img src="banner_4[1].jpg" alt="Electronics Deals">
+  </div>
+</div>
+
+<!-- Categories Scroll -->
+<section class="category-scroll-section">
+  <h2 class="category-title">Shop by Category</h2>
+  <div class="category-scroll-container">
+    <!-- Repeat category-card -->
+    <!-- Example -->
+    <a href="#electronics" class="category-card">
+      <img src="electronics.jpeg.jpg" alt="Electronics">
+      <p class="category-label">Electronics</p>
+    </a>
+    <a href="#makeup" class="category-card">
+        <img src="makeup.webp" alt="Makeup">
+        <p class="category-label">Makeup</p>
+      </a>
+      <a href="#smartphones" class="category-card">
+        <img src="phone.webp" alt="Smart Phones">
+        <p class="category-label">Smart Phones</p>
+      </a>
+      <a href="#perfume" class="category-card">
+        <img src="perfume.jpg" alt="Men Perfume">
+        <p class="category-label">Men Perfume</p>
+      </a>
+      <a href="#bags" class="category-card">
+        <img src="bags.webp" alt="Bags">
+        <p class="category-label">Bags</p>
+      </a>
+      <a href="#footwear" class="category-card">
+        <img src="foot wear.jpg" alt="Footwear">
+        <p class="category-label">Footwear</p>
+      </a>
+      <a href="#watches" class="category-card">
+        <img src="rolex watches.webp" alt="Watches">
+        <p class="category-label">Watches</p>
+      </a>
+      <a href="#home-decor" class="category-card">
+        <img src="home decor.jpg" alt="Home Decor">
+        <p class="category-label">Home Decor</p>
+      </a>
+  
+      <!-- New Items -->
+      <a href="#grocery" class="category-card">
+        <img src="grocery.png" alt="Grocery">
+        <p class="category-label">Grocery</p>
+      </a>
+      <a href="#kitchen" class="category-card">
+        <img src="kitchen tools.jpg" alt="Kitchen Tools">
+        <p class="category-label">Kitchen Tools</p>
+      </a>
+      <a href="#stationery" class="category-card">
+        <img src="stationary.jpg" alt="Stationery">
+        <p class="category-label">Stationery</p>
+      </a>
+      <a href="#toys" class="category-card">
+        <img src="toys.jpg" alt="Toys">
+        <p class="category-label">Toys</p>
+      </a>
+      <a href="#jewellery" class="category-card">
+        <img src="jewellary.jpg" alt="Jewellery">
+        <p class="category-label">Jewellery</p>
+      </a>
+      <a href="#furniture" class="category-card">
+        <img src="furniture.avif" alt="Furniture">
+        <p class="category-label">Furniture</p>
+      </a>
+      <a href="#pets" class="category-card">
+        <img src="pet supplies.avif" alt="Pet Supplies">
+        <p class="category-label">Pet Supplies</p>
+      </a>
+    <!-- Add others similarly -->
+  </div>
+</section>
+
+<!-- Products Section -->
+<div class="products-container">
+  <div class="product-card">
+    <img src="phone1.cms" alt="Smartphone X2">
+    <h4>Smartphone X2</h4>
+    <p>Latest model with advanced features</p>
+    <p class="price">₹59,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐☆</span>
+      <button class="buy-btn" onclick="buyNow('Smartphone X2', '₹59,999', 'phone1.cms', 'Latest model with advanced features')">Buy Now</button>
+    </div>
+  </div>
+</div>
+
+  
+  <div class="product-card">
+    <img src="shoe.webp" alt="Product">
+    <h4>Running Shoes</h4>
+    <p>Comfortable and stylish shoes</p>
+    <p class="price">₹4,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="makeup1.webp" alt="Product">
+    <h4>Makeup Essentials</h4>
+    <p>Everything you need for a glam look</p>
+    <p class="price">₹2,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="novel1.webp" alt="Product">
+    <h4>Bestseller Novel</h4>
+    <p>Trending & Top-rated fiction book</p>
+    <p class="price">₹399</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="top.jpeg" alt="Product">
+    <h4>Ultra Laptop</h4>
+    <p>Lightweight and powerful laptops </p>
+    <p class="price">₹75,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    
+    </div>
+
+    
+  </div>
+  <div class="product-card">
+    <img src="foot wear.jpg" alt="Product">
+    <h4>Running Shoes</h4>
+    <p>Comfortable and Top-rated running shoes</p>
+    <p class="price">₹3,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="makeup.webp" alt="Product">
+    <h4>Makeup Essentials</h4>
+    <p>Everything you need for a glam look</p>
+    <p class="price">₹2,599</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="novel.jpg" alt="Product">
+    <h4>Bestseller Novel</h4>
+    <p>Bestselling Newyork fiction book</p>
+    <p class="price">₹599</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="top.jpg" alt="Product">
+    <h4>Ultra Laptop</h4>
+    <p>Lightweight and Ultra bettery laptops</p>
+    <p class="price">₹65,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="product-card">
+    <img src="airpods.webp" alt="Product">
+    <h4>Wireless Headphones</h4>
+    <p>Noise cancelling with high bass</p>
+    <p class="price">₹2,999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="smartwatch.webp" alt="Product">
+    <h4>Smart Watch</h4>
+    <p>Fitness tracking and notifications</p>
+    <p class="price">₹3,499</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="travel.webp"Product">
+    <h4>Travel Backpack</h4>
+    <p>Spacious and waterproof bags for Travels</p>
+    <p class="price">₹1,499</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="sunglass.webp" alt="Product">
+    <h4>Polarized Sunglasses</h4>
+    <p>Stylish UV protection Sunglasses</p>
+    <p class="price">₹999</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="kichen.webp" alt="Product">
+    <h4>Kitchen Blender</h4>
+    <p>Multi-speed for all tasks in Kichen</p>
+    <p class="price">₹2,299</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+</div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="product-card">
+    <img src="pen.webp" alt="Product">
+    <h4>Luxury Pen Set</h4>
+    <p>Perfect for gifting pen lovers</p>
+    <p class="price">₹299</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="note.jpeg" alt="Product">
+    <h4>Hardcover Notebook</h4>
+    <p>Elegant and durable</p>
+    <p class="price">₹199</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <button onclick="buynow('Hardcover Notebook', 199)" class="buy-btn">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="pendrive.webp" alt="Product">
+    <h4>USB Flash Drive</h4>
+    <p>32GB high speed</p>
+    <p class="price">₹349</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="jewell.webp" alt="Product">
+    <h4>Silver Earrings</h4>
+    <p>Trendy design</p>
+    <p class="price">₹499</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="face.jpeg" alt="Product">
+    <h4>Aloe Face Mask</h4>
+    <p>Refreshing and hydrating</p>
+    <p class="price">₹149</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <!-- Row 4 -->
+  <div class="product-card">
+    <img src="keychain.jpg" alt="Product">
+    <h4>Custom Keychain</h4>
+    <p>Personalized keyChains</p>
+    <p class="price">₹99</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="irror.jpeg" alt="Product">
+    <h4>Compact Hand Mirror</h4>
+    <p>on-the-go touch-ups</p>
+    <p class="price">₹149</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="soap.jpg" alt="Product">
+    <h4>Natural Soap Set</h4>
+    <p>Herbal and chemical-free</p>
+    <p class="price">₹299</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="jewell.jpg" alt="Product">
+    <h4>Stylish Hair Clip</h4>
+    <p>Trendy hair accessory</p>
+    <p class="price">₹89</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐</span>
+      <a href="cart.html" class="buy-btn">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="nail.png" alt="Product">
+    <h4>Glossy Nail Polish</h4>
+    <p>Long lasting finish</p>
+    <p class="price">₹129</p>
+    <div class="card-actions">
+      <span class="heart-icon">🤍</span>
+      <span class="rating">⭐⭐⭐☆</span>
+      <button onclick="buyNow('Glossy nail polish', 'Long lasting finish', '₹129', 'nail.png')">Buy Now</button>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hearts = document.querySelectorAll(".heart-icon");
+      hearts.forEach(heart => {
+        heart.addEventListener("click", () => {
+          heart.classList.toggle("liked");
+          heart.textContent = heart.classList.contains("liked") ? "❤️" : "🤍";
+        });
+      });
+    });
+  </script>
+
+<script>
+  function buyNow(name, price, image, description) {
+    const product = { name, price, image, description, quantity: 1 };
+    localStorage.setItem("cartItem", JSON.stringify(product));
+    window.location.href = "cart.html"; // Redirect to the cart page
+  }
+</script>
+
+
+</body>
+</html>
